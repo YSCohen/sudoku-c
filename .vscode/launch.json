@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug board-lifecycle",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/test_sudoku",
+            "args": ["board-lifecycle"],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "MIMode": "gdb"
+        },
+        {
+            "name": "Debug board-lifecycle alloc failures",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/test_alloc_fail",
+            "args": ["board-lifecycle"],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "MIMode": "gdb"
+        }
+    ]
+}
