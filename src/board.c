@@ -8,8 +8,22 @@ int board_coordinates_in_range(int row, int column) {
 }
 
 SudokuBoard *board_create(void) {
-    /* STUDENT TODO 1: Implement the complete board constructor. */
-    return NULL;
+    /* STUDENT DONE 1: Implement the complete board constructor. */
+    SudokuBoard *board = malloc(sizeof *board);
+    if (board == NULL)
+    {
+        return NULL;
+    }
+    
+    // apparently board->cells === (*board).cells
+    board->cells = calloc(81, sizeof *board->cells);
+    if (board->cells == NULL)
+    {
+        free(board);
+        return NULL;
+    }
+
+    return board;
 }
 
 SudokuBoard *board_clone(const SudokuBoard *source) {
@@ -19,8 +33,15 @@ SudokuBoard *board_clone(const SudokuBoard *source) {
 }
 
 void board_destroy(SudokuBoard **board_ptr) {
-    /* STUDENT TODO 1: Release a board and clear the caller's pointer. */
-    (void)board_ptr;
+    /* STUDENT DONE 1: Release a board and clear the caller's pointer. */
+    if (board_ptr == NULL || *board_ptr == NULL)
+    {
+        return;
+    }
+    
+    free((*board_ptr)->cells);
+    free(*board_ptr);
+    *board_ptr = NULL;
 }
 
 int *board_cell(SudokuBoard *board, int row, int column) {
