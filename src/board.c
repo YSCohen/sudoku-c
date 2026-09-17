@@ -9,7 +9,20 @@ int board_coordinates_in_range(int row, int column) {
 
 SudokuBoard *board_create(void) {
     /* STUDENT TODO 1: Implement the complete board constructor. */
-    return NULL;
+    SudokuBoard *board = malloc(sizeof *board);
+    if (board == NULL)
+    {
+        return NULL;
+    }
+    
+    // apparently board->cells === (*board).cells
+    board->cells = calloc(81, sizeof *board->cells);
+    if (board->cells == NULL)
+    {
+        return NULL;
+    }
+
+    return board;
 }
 
 SudokuBoard *board_clone(const SudokuBoard *source) {
