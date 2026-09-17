@@ -3,7 +3,7 @@
     "configurations": [
         // 1 - board-lifecycle
         {
-            "name": "Debug board-lifecycle",
+            "name": "1 - Debug board-lifecycle",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/test_sudoku",
@@ -15,7 +15,7 @@
             "MIMode": "gdb"
         },
         {
-            "name": "Debug board-lifecycle alloc failures",
+            "name": "1 - Debug board-lifecycle alloc failures",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/test_alloc_fail",
@@ -29,12 +29,26 @@
 
         // 2 - board-access
         {
-            "name": "Debug board-access",
+            "name": "2 - Debug board-access",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/test_sudoku",
             "args": [
                 "board-access"
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "MIMode": "gdb"
+        },
+
+        // 3 - board-clone
+        {
+            "name": "3 - Debug board-clone",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/test_sudoku",
+            "args": [
+                "board-clone"
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
