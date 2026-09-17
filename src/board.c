@@ -45,12 +45,12 @@ void board_destroy(SudokuBoard **board_ptr) {
 }
 
 int *board_cell(SudokuBoard *board, int row, int column) {
-    /* STUDENT TODO 2: Return the mutable cell pointer for this coordinate. */
+    /* STUDENT DONE 2: Return the mutable cell pointer for this coordinate. */
     return (int *)board_cell_const(board, row, column);
 }
 
 const int *board_cell_const(const SudokuBoard *board, int row, int column) {
-    /* STUDENT TODO 2: Return the read-only cell pointer for this coordinate. */
+    /* STUDENT DONE 2: Return the read-only cell pointer for this coordinate. */
     if (board == NULL || !board_coordinates_in_range(row, column))
     {
         return NULL;
