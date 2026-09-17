@@ -25,7 +25,7 @@ SudokuBoard *board_create(void) {
 }
 
 SudokuBoard *board_clone(const SudokuBoard *source) {
-    /* STUDENT TODO 3: Return a separate board with independent cell storage. */
+    /* STUDENT DONE 3: Return a separate board with independent cell storage. */
     if (!source || !source->cells) return NULL;
     
     SudokuBoard *clone = malloc(sizeof *clone);
