@@ -1,6 +1,7 @@
 #include "board.h"
 
 #include <stdlib.h>
+#include <string.h> // for memcpy for board cloning
 
 int board_coordinates_in_range(int row, int column) {
     return row >= 0 && row < SUDOKU_SIZE &&
@@ -10,14 +11,11 @@ int board_coordinates_in_range(int row, int column) {
 SudokuBoard *board_create(void) {
     /* STUDENT DONE 1: Implement the complete board constructor. */
     SudokuBoard *board = malloc(sizeof *board);
-    if (board == NULL)
-    {
-        return NULL;
-    }
+    if (!board) return NULL;
     
     // apparently board->cells === (*board).cells
-    board->cells = calloc(81, sizeof *board->cells);
-    if (board->cells == NULL)
+    board->cells = calloc(SUDOKU_CELL_COUNT, sizeof *board->cells);
+    if (!board->cells)
     {
         free(board);
         return NULL;
@@ -27,17 +25,27 @@ SudokuBoard *board_create(void) {
 }
 
 SudokuBoard *board_clone(const SudokuBoard *source) {
-    /* STUDENT TODO 3: Return a separate board with independent cell storage. */
-    (void)source;
-    return NULL;
+    /* STUDENT DONE 3: Return a separate board with independent cell storage. */
+    if (!source || !source->cells) return NULL;
+    
+    SudokuBoard *clone = malloc(sizeof *clone);
+    if (clone) return NULL;
+
+    clone->cells = malloc(SUDOKU_CELL_COUNT * sizeof clone->cells);
+    if (!clone->cells)
+    {
+        free(clone);
+        return NULL;
+    }
+    
+    memcpy(clone->cells, source->cells, SUDOKU_CELL_COUNT * sizeof clone->cells);
+
+    return clone;
 }
 
 void board_destroy(SudokuBoard **board_ptr) {
     /* STUDENT DONE 1: Release a board and clear the caller's pointer. */
-    if (board_ptr == NULL || *board_ptr == NULL)
-    {
-        return;
-    }
+    if (!board_ptr || !*board_ptr) return;
     
     free((*board_ptr)->cells);
     free(*board_ptr);
@@ -51,10 +59,7 @@ int *board_cell(SudokuBoard *board, int row, int column) {
 
 const int *board_cell_const(const SudokuBoard *board, int row, int column) {
     /* STUDENT DONE 2: Return the read-only cell pointer for this coordinate. */
-    if (board == NULL || !board_coordinates_in_range(row, column))
-    {
-        return NULL;
-    }
+    if (board == NULL || !board_coordinates_in_range(row, column)) return NULL;
 
     int idx = (SUDOKU_SIZE * row) + column;
     return &(board->cells[idx]);
