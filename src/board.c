@@ -19,6 +19,7 @@ SudokuBoard *board_create(void) {
     board->cells = calloc(81, sizeof *board->cells);
     if (board->cells == NULL)
     {
+        free(board);
         return NULL;
     }
 
