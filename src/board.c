@@ -46,13 +46,7 @@ void board_destroy(SudokuBoard **board_ptr) {
 
 int *board_cell(SudokuBoard *board, int row, int column) {
     /* STUDENT TODO 2: Return the mutable cell pointer for this coordinate. */
-    if (board == NULL || !board_coordinates_in_range(row, column))
-    {
-        return NULL;
-    }
-    
-    int idx = (9 * row) + column;
-    return &(board->cells[idx]);
+    return (int *)board_cell_const(board, row, column);
 }
 
 const int *board_cell_const(const SudokuBoard *board, int row, int column) {
@@ -62,7 +56,7 @@ const int *board_cell_const(const SudokuBoard *board, int row, int column) {
         return NULL;
     }
 
-    int idx = (9 * row) + column;
+    int idx = (SUDOKU_SIZE * row) + column;
     return &(board->cells[idx]);
 }
 
