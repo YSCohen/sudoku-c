@@ -1,12 +1,15 @@
 {
     "version": "0.2.0",
     "configurations": [
+        // 1 - board-lifecycle
         {
             "name": "Debug board-lifecycle",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/test_sudoku",
-            "args": ["board-lifecycle"],
+            "args": [
+                "board-lifecycle"
+            ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "MIMode": "gdb"
@@ -16,10 +19,26 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/test_alloc_fail",
-            "args": ["board-lifecycle"],
+            "args": [
+                "board-lifecycle"
+            ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "MIMode": "gdb"
-        }
+        },
+
+        // 2 - board-access
+        {
+            "name": "Debug board-access",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/test_sudoku",
+            "args": [
+                "board-access"
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "MIMode": "gdb"
+        },
     ]
 }
