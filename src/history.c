@@ -25,8 +25,9 @@ int history_push(MoveHistory* history, Move move)
         if (history->capacity == 0) {
             history->items = malloc(INITIAL_HISTORY_CAPACITY * sizeof(*history->items));
             if (history->items == NULL) return 0;
+            history->capacity = INITIAL_HISTORY_CAPACITY;
         } else {
-            Move* tmp = realloc(history->items, sizeof(history->items) * 2);
+            Move* tmp = realloc(history->items, sizeof(*history->items) * history->capacity * 2);
             if (tmp == NULL) return 0;
 
             history->items = tmp;
@@ -34,14 +35,14 @@ int history_push(MoveHistory* history, Move move)
         }
     }
 
-    history->items[history->count++] = move; // TODO: should be &move ?
+    history->items[history->count++] = move;
     return 1;
 }
 
 int history_pop(MoveHistory* history, Move* result)
 {
     /* STUDENT TODO 4: Remove and return the most recent move. */
-    if (history == NULL || history->items == NULL) return 0;
+    if (history == NULL || history->items == NULL || history->count == 0) return 0;
 
     *result = history->items[--history->count];
     return 1;
@@ -58,6 +59,8 @@ void history_clear(MoveHistory* history)
 
 void history_destroy(MoveHistory* history)
 {
+    if (history == NULL || history->items == NULL) return;
+
     free(history->items);
     history->items = NULL;
 

@@ -54,5 +54,19 @@
             "stopAtEntry": false,
             "MIMode": "gdb"
         },
+
+        // 4 - history
+        {
+            "name": "4 - Debug history",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/test_sudoku",
+            "args": [
+                "history"
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "MIMode": "gdb"
+        },
     ]
 }
