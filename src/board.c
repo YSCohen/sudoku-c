@@ -1,7 +1,6 @@
 #include "board.h"
 
 #include <stdlib.h>
-#include <string.h> // for memcpy for board cloning
 
 int board_coordinates_in_range(int row, int column) {
     return row >= 0 && row < SUDOKU_SIZE &&
@@ -29,7 +28,7 @@ SudokuBoard *board_clone(const SudokuBoard *source) {
     if (!source || !source->cells) return NULL;
     
     SudokuBoard *clone = malloc(sizeof *clone);
-    if (clone) return NULL;
+    if (!clone) return NULL;
 
     clone->cells = malloc(SUDOKU_CELL_COUNT * sizeof clone->cells);
     if (!clone->cells)
@@ -38,7 +37,7 @@ SudokuBoard *board_clone(const SudokuBoard *source) {
         return NULL;
     }
     
-    memcpy(clone->cells, source->cells, SUDOKU_CELL_COUNT * sizeof clone->cells);
+    board_copy(clone, source);
 
     return clone;
 }
