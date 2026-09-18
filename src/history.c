@@ -17,9 +17,25 @@ void history_init(MoveHistory *history) {
 
 int history_push(MoveHistory *history, Move move) {
     /* STUDENT TODO 4: Append one move to the resizable history array. */
-    (void)history;
-    (void)move;
-    return 0;
+    if (history == NULL) return NULL;
+
+    if (history->count == history->capacity) {
+        if (history->capacity == 0)
+        {
+            history->items = malloc(sizeof(history->items) * 8);
+            if (history->items == NULL) return NULL;
+        } else {
+            Move *tmp = realloc(history->items, sizeof(history->items) * 2);
+            if (tmp == NULL) return NULL;
+
+            history->items = tmp;
+            history->capacity *= 2;
+        }
+    }
+
+    history->items[history->count] = move; // should be &move ?
+    history->count++;
+    return 1;
 }
 
 int history_pop(MoveHistory *history, Move *result) {
