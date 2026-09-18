@@ -18,7 +18,7 @@ void history_init(MoveHistory* history)
 
 int history_push(MoveHistory* history, Move move)
 {
-    /* STUDENT TODO 4: Append one move to the resizable history array. */
+    /* STUDENT DONE 4: Append one move to the resizable history array. */
     if (history == NULL) return 0;
 
     if (history->count == history->capacity) {
@@ -41,7 +41,7 @@ int history_push(MoveHistory* history, Move move)
 
 int history_pop(MoveHistory* history, Move* result)
 {
-    /* STUDENT TODO 4: Remove and return the most recent move. */
+    /* STUDENT DONE 4: Remove and return the most recent move. */
     if (history == NULL || history->items == NULL || history->count == 0) return 0;
 
     *result = history->items[--history->count];
