@@ -2,20 +2,20 @@
 
 #include <stdlib.h>
 
-int board_coordinates_in_range(int row, int column) {
-    return row >= 0 && row < SUDOKU_SIZE &&
-           column >= 0 && column < SUDOKU_SIZE;
+int board_coordinates_in_range(int row, int column)
+{
+    return row >= 0 && row < SUDOKU_SIZE && column >= 0 && column < SUDOKU_SIZE;
 }
 
-SudokuBoard *board_create(void) {
+SudokuBoard* board_create(void)
+{
     /* STUDENT DONE 1: Implement the complete board constructor. */
-    SudokuBoard *board = malloc(sizeof *board);
+    SudokuBoard* board = malloc(sizeof(*board));
     if (!board) return NULL;
-    
+
     // apparently board->cells === (*board).cells
-    board->cells = calloc(SUDOKU_CELL_COUNT, sizeof *board->cells);
-    if (!board->cells)
-    {
+    board->cells = calloc(SUDOKU_CELL_COUNT, sizeof(*board->cells));
+    if (!board->cells) {
         free(board);
         return NULL;
     }
@@ -23,40 +23,44 @@ SudokuBoard *board_create(void) {
     return board;
 }
 
-SudokuBoard *board_clone(const SudokuBoard *source) {
+SudokuBoard* board_clone(const SudokuBoard* source)
+{
     /* STUDENT DONE 3: Return a separate board with independent cell storage. */
     if (!source || !source->cells) return NULL;
-    
-    SudokuBoard *clone = malloc(sizeof *clone);
+
+    SudokuBoard* clone = malloc(sizeof(*clone));
     if (!clone) return NULL;
 
-    clone->cells = malloc(SUDOKU_CELL_COUNT * sizeof clone->cells);
-    if (!clone->cells)
-    {
+    clone->cells = malloc(SUDOKU_CELL_COUNT * sizeof(clone->cells));
+    if (!clone->cells) {
         free(clone);
         return NULL;
     }
-    
+
     board_copy(clone, source);
 
     return clone;
 }
 
-void board_destroy(SudokuBoard **board_ptr) {
+void board_destroy(SudokuBoard** board_ptr)
+{
     /* STUDENT DONE 1: Release a board and clear the caller's pointer. */
-    if (!board_ptr || !*board_ptr) return;
-    
+    if (!board_ptr || !*board_ptr)
+        return;
+
     free((*board_ptr)->cells);
     free(*board_ptr);
     *board_ptr = NULL;
 }
 
-int *board_cell(SudokuBoard *board, int row, int column) {
+int* board_cell(SudokuBoard* board, int row, int column)
+{
     /* STUDENT DONE 2: Return the mutable cell pointer for this coordinate. */
-    return (int *)board_cell_const(board, row, column);
+    return (int*)board_cell_const(board, row, column);
 }
 
-const int *board_cell_const(const SudokuBoard *board, int row, int column) {
+const int* board_cell_const(const SudokuBoard* board, int row, int column)
+{
     /* STUDENT DONE 2: Return the read-only cell pointer for this coordinate. */
     if (board == NULL || !board_coordinates_in_range(row, column)) return NULL;
 
@@ -64,9 +68,10 @@ const int *board_cell_const(const SudokuBoard *board, int row, int column) {
     return &(board->cells[idx]);
 }
 
-void board_clear(SudokuBoard *board) {
-    int *cursor;
-    int *end;
+void board_clear(SudokuBoard* board)
+{
+    int* cursor;
+    int* end;
 
     if (board == NULL || board->cells == NULL) {
         return;
@@ -81,9 +86,9 @@ void board_clear(SudokuBoard *board) {
     }
 }
 
-int board_copy(SudokuBoard *destination, const SudokuBoard *source) {
-    if (destination == NULL || destination->cells == NULL ||
-        source == NULL || source->cells == NULL) {
+int board_copy(SudokuBoard* destination, const SudokuBoard* source)
+{
+    if (destination == NULL || destination->cells == NULL || source == NULL || source->cells == NULL) {
         return 0;
     }
 
@@ -94,9 +99,9 @@ int board_copy(SudokuBoard *destination, const SudokuBoard *source) {
     return 1;
 }
 
-int board_equal(const SudokuBoard *first, const SudokuBoard *second) {
-    if (first == NULL || first->cells == NULL ||
-        second == NULL || second->cells == NULL) {
+int board_equal(const SudokuBoard* first, const SudokuBoard* second)
+{
+    if (first == NULL || first->cells == NULL || second == NULL || second->cells == NULL) {
         return 0;
     }
 

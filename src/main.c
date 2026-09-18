@@ -6,8 +6,9 @@
 
 #define INPUT_SIZE 128
 
-int main(void) {
-    SudokuGame *game;
+int main(void)
+{
+    SudokuGame* game;
     char input[INPUT_SIZE];
     int keep_running = 1;
 

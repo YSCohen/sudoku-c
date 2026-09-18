@@ -5,31 +5,32 @@
 
 #define INPUT_SIZE 128
 
-static int handle_new(SudokuGame *game, const char *arguments, FILE *output);
-static int handle_set(SudokuGame *game, const char *arguments, FILE *output);
-static int handle_clear(SudokuGame *game, const char *arguments, FILE *output);
-static int handle_undo(SudokuGame *game, const char *arguments, FILE *output);
-static int handle_print(SudokuGame *game, const char *arguments, FILE *output);
-static int handle_solution(SudokuGame *game, const char *arguments, FILE *output);
-static int handle_help(SudokuGame *game, const char *arguments, FILE *output);
-static int handle_quit(SudokuGame *game, const char *arguments, FILE *output);
+static int handle_new(SudokuGame* game, const char* arguments, FILE* output);
+static int handle_set(SudokuGame* game, const char* arguments, FILE* output);
+static int handle_clear(SudokuGame* game, const char* arguments, FILE* output);
+static int handle_undo(SudokuGame* game, const char* arguments, FILE* output);
+static int handle_print(SudokuGame* game, const char* arguments, FILE* output);
+static int handle_solution(SudokuGame* game, const char* arguments, FILE* output);
+static int handle_help(SudokuGame* game, const char* arguments, FILE* output);
+static int handle_quit(SudokuGame* game, const char* arguments, FILE* output);
 
 static const CommandEntry COMMANDS[] = {
-    {"new", handle_new},
-    {"set", handle_set},
-    {"place", handle_set},
-    {"clear", handle_clear},
-    {"undo", handle_undo},
-    {"print", handle_print},
-    {"board", handle_print},
-    {"solution", handle_solution},
-    {"reveal", handle_solution},
-    {"help", handle_help},
-    {"quit", handle_quit},
-    {"exit", handle_quit}
+    { "new", handle_new },
+    { "set", handle_set },
+    { "place", handle_set },
+    { "clear", handle_clear },
+    { "undo", handle_undo },
+    { "print", handle_print },
+    { "board", handle_print },
+    { "solution", handle_solution },
+    { "reveal", handle_solution },
+    { "help", handle_help },
+    { "quit", handle_quit },
+    { "exit", handle_quit }
 };
 
-const CommandEntry *command_table(size_t *count) {
+const CommandEntry* command_table(size_t* count)
+{
     /* STUDENT TODO 7: Expose the command table and its element count. */
     if (count != NULL) {
         *count = 0;
@@ -37,7 +38,8 @@ const CommandEntry *command_table(size_t *count) {
     return COMMANDS;
 }
 
-void command_print_help(FILE *output) {
+void command_print_help(FILE* output)
+{
     if (output == NULL) {
         return;
     }
@@ -57,22 +59,24 @@ void command_print_help(FILE *output) {
     fprintf(output, "\nRows, columns, and values are numbered 1 through 9.\n");
 }
 
-static void lowercase_string(char *text) {
+static void lowercase_string(char* text)
+{
     while (text != NULL && *text != '\0') {
         *text = (char)tolower((unsigned char)*text);
         text++;
     }
 }
 
-static char *skip_spaces(char *text) {
-    while (text != NULL && *text != '\0' &&
-           isspace((unsigned char)*text)) {
+static char* skip_spaces(char* text)
+{
+    while (text != NULL && *text != '\0' && isspace((unsigned char)*text)) {
         text++;
     }
     return text;
 }
 
-static int parse_difficulty(const char *word, Difficulty *difficulty) {
+static int parse_difficulty(const char* word, Difficulty* difficulty)
+{
     if (word == NULL || difficulty == NULL) {
         return 0;
     }
@@ -81,8 +85,7 @@ static int parse_difficulty(const char *word, Difficulty *difficulty) {
         *difficulty = DIFFICULTY_EASY;
         return 1;
     }
-    if (strcmp(word, "medium") == 0 || strcmp(word, "game") == 0 ||
-        *word == '\0') {
+    if (strcmp(word, "medium") == 0 || strcmp(word, "game") == 0 || *word == '\0') {
         *difficulty = DIFFICULTY_MEDIUM;
         return 1;
     }
@@ -94,13 +97,13 @@ static int parse_difficulty(const char *word, Difficulty *difficulty) {
     return 0;
 }
 
-static int handle_new(SudokuGame *game, const char *arguments, FILE *output) {
+static int handle_new(SudokuGame* game, const char* arguments, FILE* output)
+{
     char difficulty_word[INPUT_SIZE] = "";
     Difficulty difficulty = DIFFICULTY_MEDIUM;
     int holes;
 
-    if (sscanf(arguments, "%127s", difficulty_word) == 1 &&
-        !parse_difficulty(difficulty_word, &difficulty)) {
+    if (sscanf(arguments, "%127s", difficulty_word) == 1 && !parse_difficulty(difficulty_word, &difficulty)) {
         fprintf(output, "Unknown difficulty. Choose easy, medium, or hard.\n");
         return 1;
     }
@@ -112,12 +115,13 @@ static int handle_new(SudokuGame *game, const char *arguments, FILE *output) {
     }
 
     fprintf(output, "Started a new %s game with %d empty cells.\n",
-            sudoku_difficulty_name(difficulty), holes);
+        sudoku_difficulty_name(difficulty), holes);
     game_print_to(game, output);
     return 1;
 }
 
-static int handle_set(SudokuGame *game, const char *arguments, FILE *output) {
+static int handle_set(SudokuGame* game, const char* arguments, FILE* output)
+{
     int row;
     int column;
     int value;
@@ -141,9 +145,10 @@ static int handle_set(SudokuGame *game, const char *arguments, FILE *output) {
     return 1;
 }
 
-static int handle_clear(SudokuGame *game,
-                        const char *arguments,
-                        FILE *output) {
+static int handle_clear(SudokuGame* game,
+    const char* arguments,
+    FILE* output)
+{
     int row;
     int column;
     MoveResult result;
@@ -163,9 +168,10 @@ static int handle_clear(SudokuGame *game,
     return 1;
 }
 
-static int handle_undo(SudokuGame *game,
-                       const char *arguments,
-                       FILE *output) {
+static int handle_undo(SudokuGame* game,
+    const char* arguments,
+    FILE* output)
+{
     MoveResult result;
 
     (void)arguments;
@@ -179,45 +185,50 @@ static int handle_undo(SudokuGame *game,
     return 1;
 }
 
-static int handle_print(SudokuGame *game,
-                        const char *arguments,
-                        FILE *output) {
+static int handle_print(SudokuGame* game,
+    const char* arguments,
+    FILE* output)
+{
     (void)arguments;
     game_print_to(game, output);
     return 1;
 }
 
-static int handle_solution(SudokuGame *game,
-                           const char *arguments,
-                           FILE *output) {
+static int handle_solution(SudokuGame* game,
+    const char* arguments,
+    FILE* output)
+{
     (void)arguments;
     game_print_solution_to(game, output);
     return 1;
 }
 
-static int handle_help(SudokuGame *game,
-                       const char *arguments,
-                       FILE *output) {
+static int handle_help(SudokuGame* game,
+    const char* arguments,
+    FILE* output)
+{
     (void)game;
     (void)arguments;
     command_print_help(output);
     return 1;
 }
 
-static int handle_quit(SudokuGame *game,
-                       const char *arguments,
-                       FILE *output) {
+static int handle_quit(SudokuGame* game,
+    const char* arguments,
+    FILE* output)
+{
     (void)game;
     (void)arguments;
     (void)output;
     return 0;
 }
 
-int command_dispatch(SudokuGame *game, char *input, FILE *output) {
-    char *command_name;
-    char *arguments;
+int command_dispatch(SudokuGame* game, char* input, FILE* output)
+{
+    char* command_name;
+    char* arguments;
     size_t command_count;
-    const CommandEntry *commands;
+    const CommandEntry* commands;
 
     if (input == NULL || output == NULL) {
         return 0;

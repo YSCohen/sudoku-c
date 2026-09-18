@@ -5,7 +5,8 @@
 
 #define INITIAL_HISTORY_CAPACITY 8U
 
-void history_init(MoveHistory *history) {
+void history_init(MoveHistory* history)
+{
     if (history == NULL) {
         return;
     }
@@ -15,21 +16,40 @@ void history_init(MoveHistory *history) {
     history->capacity = 0;
 }
 
-int history_push(MoveHistory *history, Move move) {
-    /* STUDENT TODO 4: Append one move to the resizable history array. */
-    (void)history;
-    (void)move;
-    return 0;
+int history_push(MoveHistory* history, Move move)
+{
+    /* STUDENT DONE 4: Append one move to the resizable history array. */
+    if (history == NULL) return 0;
+
+    if (history->count == history->capacity) {
+        if (history->capacity == 0) {
+            history->items = malloc(INITIAL_HISTORY_CAPACITY * sizeof(*history->items));
+            if (history->items == NULL) return 0;
+            history->capacity = INITIAL_HISTORY_CAPACITY;
+        } else {
+            Move* tmp = realloc(history->items, sizeof(*history->items) * history->capacity * 2);
+            if (tmp == NULL) return 0;
+
+            history->items = tmp;
+            history->capacity *= 2;
+        }
+    }
+
+    history->items[history->count++] = move;
+    return 1;
 }
 
-int history_pop(MoveHistory *history, Move *result) {
-    /* STUDENT TODO 4: Remove and return the most recent move. */
-    (void)history;
-    (void)result;
-    return 0;
+int history_pop(MoveHistory* history, Move* result)
+{
+    /* STUDENT DONE 4: Remove and return the most recent move. */
+    if (history == NULL || history->items == NULL || history->count == 0) return 0;
+
+    *result = history->items[--history->count];
+    return 1;
 }
 
-void history_clear(MoveHistory *history) {
+void history_clear(MoveHistory* history)
+{
     if (history == NULL) {
         return;
     }
@@ -37,7 +57,13 @@ void history_clear(MoveHistory *history) {
     history->count = 0;
 }
 
-void history_destroy(MoveHistory *history) {
-    /* STUDENT TODO 4: Release all storage owned by the history. */
-    (void)history;
+void history_destroy(MoveHistory* history)
+{
+    if (history == NULL || history->items == NULL) return;
+
+    free(history->items);
+    history->items = NULL;
+
+    history->capacity = 0;
+    history->count = 0;
 }
