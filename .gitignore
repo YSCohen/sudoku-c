@@ -1,4 +1,6 @@
 *.o
 
-test_alloc_fail
-test_sudoku
+test_*
+sudoku
+*_san
+vgcore*
