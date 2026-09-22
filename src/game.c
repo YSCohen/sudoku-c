@@ -33,7 +33,7 @@ static unsigned char* create_fixed_map(const SudokuBoard* puzzle)
 SudokuGame* game_create(void)
 {
     /* STUDENT DONE 5: Construct an empty game object. */
-    SudokuGame* game = malloc(sizeof(*game));
+    SudokuGame* game = calloc(1, sizeof(*game));
     if (!game) return NULL;
 
     return game;
@@ -56,13 +56,50 @@ void game_destroy(SudokuGame** game_ptr)
 int game_start_new(SudokuGame* game, Difficulty difficulty)
 {
     /*
-     * STUDENT TODO 6: Replace the current game with a newly generated one.
+     * STUDENT DONE 6: Replace the current game with a newly generated one.
      * A failed replacement must leave an existing game unchanged.
      */
-    (void)game;
-    (void)difficulty;
-    (void)create_fixed_map;
-    return 0;
+
+    if (!game) return 0;
+
+    SudokuGame* newGame = game_create();
+    if (!newGame) return 0;
+
+    newGame->solution = sudoku_generate_solution();
+    if (!newGame->solution) {
+        free(newGame);
+        return 0;
+    }
+
+    // unclear purpose of holes_created param in sudoku_generate_puzzle
+    newGame->puzzle = sudoku_generate_puzzle(newGame->solution, difficulty, NULL);
+    if (!newGame->puzzle) {
+        board_destroy(&newGame->solution);
+        free(newGame);
+        return 0;
+    }
+
+    newGame->fixed = create_fixed_map(newGame->puzzle);
+    if (!newGame->fixed) {
+        board_destroy(&newGame->solution);
+        board_destroy(&newGame->puzzle);
+        free(newGame);
+        return 0;
+    }
+
+    newGame->difficulty = difficulty;
+    newGame->history = game->history;
+    history_clear(&newGame->history);
+    newGame->active = 1;
+
+    board_destroy(&game->solution);
+    board_destroy(&game->puzzle);
+    free(game->fixed);
+
+    *game = *newGame;
+    free(newGame);
+
+    return 1;
 }
 
 int game_cell_is_fixed(const SudokuGame* game, int row, int column)
