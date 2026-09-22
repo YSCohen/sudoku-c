@@ -56,7 +56,7 @@ void game_destroy(SudokuGame** game_ptr)
 int game_start_new(SudokuGame* game, Difficulty difficulty)
 {
     /*
-     * STUDENT TODO 6: Replace the current game with a newly generated one.
+     * STUDENT DONE 6: Replace the current game with a newly generated one.
      * A failed replacement must leave an existing game unchanged.
      */
 
@@ -71,7 +71,7 @@ int game_start_new(SudokuGame* game, Difficulty difficulty)
         return 0;
     }
 
-    // purpose of holes_created param in sudoku_generate_puzzle?
+    // unclear purpose of holes_created param in sudoku_generate_puzzle
     newGame->puzzle = sudoku_generate_puzzle(newGame->solution, difficulty, NULL);
     if (!newGame->puzzle) {
         board_destroy(&newGame->solution);
@@ -96,7 +96,7 @@ int game_start_new(SudokuGame* game, Difficulty difficulty)
     board_destroy(&game->puzzle);
     free(game->fixed);
 
-    *game = *newGame; // TODO: is this correct?
+    *game = *newGame;
     free(newGame);
 
     return 1;
