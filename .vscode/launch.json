@@ -15,7 +15,7 @@
             "MIMode": "gdb"
         },
         {
-            "name": "1 - Debug board-lifecycle alloc failures",
+            "name": "1' - Debug board-lifecycle alloc failures",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/test_alloc_fail",
@@ -68,5 +68,33 @@
             "stopAtEntry": false,
             "MIMode": "gdb"
         },
+
+        // 5 - game-lifecycle
+        {
+            "name": "5 - Debug game-lifecycle",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/test_sudoku",
+            "args": [
+                "game-lifecycle"
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "MIMode": "gdb"
+        },
+        {
+            "name": "5' - Debug game-lifecycle alloc failures",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/test_alloc_fail",
+            "args": [
+                "game-lifecycle"
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "MIMode": "gdb"
+        },
+
+
     ]
 }
