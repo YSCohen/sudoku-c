@@ -121,5 +121,19 @@
             "MIMode": "gdb"
         },
 
+        // 7 - commands
+        {
+            "name": "7 - Debug commands",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/test_sudoku",
+            "args": [
+                "commands"
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "MIMode": "gdb"
+        },
+
     ]
 }
