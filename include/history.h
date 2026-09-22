@@ -11,15 +11,15 @@ typedef struct Move {
 } Move;
 
 typedef struct MoveHistory {
-    Move *items;
+    Move* items;
     size_t count;
     size_t capacity;
 } MoveHistory;
 
-void history_init(MoveHistory *history);
-int history_push(MoveHistory *history, Move move);
-int history_pop(MoveHistory *history, Move *result);
-void history_clear(MoveHistory *history);
-void history_destroy(MoveHistory *history);
+void history_init(MoveHistory* history);
+int history_push(MoveHistory* history, Move move);
+int history_pop(MoveHistory* history, Move* result);
+void history_clear(MoveHistory* history);
+void history_destroy(MoveHistory* history);
 
 #endif

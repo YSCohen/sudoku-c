@@ -9,19 +9,19 @@
 #define SUDOKU_EMPTY 0
 
 typedef struct SudokuBoard {
-    int *cells;
+    int* cells;
 } SudokuBoard;
 
-SudokuBoard *board_create(void);
-SudokuBoard *board_clone(const SudokuBoard *source);
-void board_destroy(SudokuBoard **board_ptr);
+SudokuBoard* board_create(void);
+SudokuBoard* board_clone(const SudokuBoard* source);
+void board_destroy(SudokuBoard** board_ptr);
 
-int *board_cell(SudokuBoard *board, int row, int column);
-const int *board_cell_const(const SudokuBoard *board, int row, int column);
+int* board_cell(SudokuBoard* board, int row, int column);
+const int* board_cell_const(const SudokuBoard* board, int row, int column);
 
-void board_clear(SudokuBoard *board);
-int board_copy(SudokuBoard *destination, const SudokuBoard *source);
-int board_equal(const SudokuBoard *first, const SudokuBoard *second);
+void board_clear(SudokuBoard* board);
+int board_copy(SudokuBoard* destination, const SudokuBoard* source);
+int board_equal(const SudokuBoard* first, const SudokuBoard* second);
 int board_coordinates_in_range(int row, int column);
 
 #endif
