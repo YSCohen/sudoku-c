@@ -49,7 +49,7 @@ void game_destroy(SudokuGame** game_ptr)
     history_destroy(&((*game_ptr)->history));
 
     free((*game_ptr)->fixed);
-
+    free(*game_ptr);
     *game_ptr = NULL;
 }
 
