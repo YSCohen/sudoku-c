@@ -5,17 +5,17 @@
 
 #include "game.h"
 
-typedef int (*CommandHandler)(SudokuGame *game,
-                              const char *arguments,
-                              FILE *output);
+typedef int (*CommandHandler)(SudokuGame* game,
+    const char* arguments,
+    FILE* output);
 
 typedef struct CommandEntry {
-    const char *name;
+    const char* name;
     CommandHandler handler;
 } CommandEntry;
 
-int command_dispatch(SudokuGame *game, char *input, FILE *output);
-void command_print_help(FILE *output);
-const CommandEntry *command_table(size_t *count);
+int command_dispatch(SudokuGame* game, char* input, FILE* output);
+void command_print_help(FILE* output);
+const CommandEntry* command_table(size_t* count);
 
 #endif
