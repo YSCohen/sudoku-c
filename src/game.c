@@ -32,7 +32,7 @@ static unsigned char* create_fixed_map(const SudokuBoard* puzzle)
 
 SudokuGame* game_create(void)
 {
-    /* STUDENT TODO 5: Construct an empty game object. */
+    /* STUDENT DONE 5: Construct an empty game object. */
     SudokuGame* game = malloc(sizeof(*game));
     if (!game) return NULL;
 
@@ -41,7 +41,7 @@ SudokuGame* game_create(void)
 
 void game_destroy(SudokuGame** game_ptr)
 {
-    /* STUDENT TODO 5: Release every allocation owned by the game. */
+    /* STUDENT DONE 5: Release every allocation owned by the game. */
     if (!game_ptr || !*game_ptr) return;
 
     board_destroy(&((*game_ptr)->puzzle));
