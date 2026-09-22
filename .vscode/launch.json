@@ -120,6 +120,6 @@
             "stopAtEntry": false,
             "MIMode": "gdb"
         },
-        
+
     ]
 }
