@@ -108,6 +108,18 @@
             "stopAtEntry": false,
             "MIMode": "gdb"
         },
+        {
+            "name": "6' - Debug new-game alloc failures",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/test_alloc_fail",
+            "args": [
+                "new-game"
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "MIMode": "gdb"
+        },
         
     ]
 }

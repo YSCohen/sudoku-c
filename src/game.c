@@ -74,15 +74,15 @@ int game_start_new(SudokuGame* game, Difficulty difficulty)
     // purpose of holes_created param in sudoku_generate_puzzle?
     newGame->puzzle = sudoku_generate_puzzle(newGame->solution, difficulty, NULL);
     if (!newGame->puzzle) {
-        free(newGame->solution);
+        board_destroy(&newGame->solution);
         free(newGame);
         return 0;
     }
 
     newGame->fixed = create_fixed_map(newGame->puzzle);
     if (!newGame->fixed) {
-        free(newGame->solution);
-        free(newGame->puzzle);
+        board_destroy(&newGame->solution);
+        board_destroy(&newGame->puzzle);
         free(newGame);
         return 0;
     }
@@ -97,6 +97,7 @@ int game_start_new(SudokuGame* game, Difficulty difficulty)
     free(game->fixed);
 
     *game = *newGame; // TODO: is this correct?
+    free(newGame);
 
     return 1;
 }
