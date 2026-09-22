@@ -45,8 +45,7 @@ SudokuBoard* board_clone(const SudokuBoard* source)
 void board_destroy(SudokuBoard** board_ptr)
 {
     /* STUDENT DONE 1: Release a board and clear the caller's pointer. */
-    if (!board_ptr || !*board_ptr)
-        return;
+    if (!board_ptr || !*board_ptr) return;
 
     free((*board_ptr)->cells);
     free(*board_ptr);
