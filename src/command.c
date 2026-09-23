@@ -255,11 +255,11 @@ int command_dispatch(SudokuGame* game, char* input, FILE* output)
 
     /* STUDENT TODO 7: Locate the named command and invoke its handler. */
     for (size_t i = 0; i < command_count; i++) {
-        if (commands[i].name == command_name) {
-            commands[i].handler(game, arguments, output);
-            return 1;
+        if (strcmp(commands[i].name, command_name) == 0) {
+            return commands[i].handler(game, arguments, output);
         }
     }
 
-    return 0;
+    fprintf(output, "Command %s is not implemented.\n", command_name);
+    return 1;
 }
