@@ -12,7 +12,8 @@
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
-            "MIMode": "gdb"
+            "MIMode": "gdb",
+            "preLaunchTask": "build tests"
         },
         {
             "name": "1' - Debug board-lifecycle alloc failures",
@@ -24,7 +25,8 @@
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
-            "MIMode": "gdb"
+            "MIMode": "gdb",
+            "preLaunchTask": "build tests"
         },
 
         // 2 - board-access
@@ -38,7 +40,8 @@
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
-            "MIMode": "gdb"
+            "MIMode": "gdb",
+            "preLaunchTask": "build tests"
         },
 
         // 3 - board-clone
@@ -52,7 +55,8 @@
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
-            "MIMode": "gdb"
+            "MIMode": "gdb",
+            "preLaunchTask": "build tests"
         },
 
         // 4 - history
@@ -66,7 +70,8 @@
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
-            "MIMode": "gdb"
+            "MIMode": "gdb",
+            "preLaunchTask": "build tests"
         },
 
         // 5 - game-lifecycle
@@ -80,7 +85,8 @@
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
-            "MIMode": "gdb"
+            "MIMode": "gdb",
+            "preLaunchTask": "build tests"
         },
         {
             "name": "5' - Debug game-lifecycle alloc failures",
@@ -92,7 +98,8 @@
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
-            "MIMode": "gdb"
+            "MIMode": "gdb",
+            "preLaunchTask": "build tests"
         },
         
         // 6 - new-game
@@ -106,7 +113,8 @@
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
-            "MIMode": "gdb"
+            "MIMode": "gdb",
+            "preLaunchTask": "build tests"
         },
         {
             "name": "6' - Debug new-game alloc failures",
@@ -118,7 +126,23 @@
             ],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
-            "MIMode": "gdb"
+            "MIMode": "gdb",
+            "preLaunchTask": "build tests"
+        },
+
+        // 7 - commands
+        {
+            "name": "7 - Debug commands",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/test_sudoku",
+            "args": [
+                "commands"
+            ],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "build tests"
         },
 
     ]
