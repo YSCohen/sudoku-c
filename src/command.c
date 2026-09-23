@@ -253,7 +253,7 @@ int command_dispatch(SudokuGame* game, char* input, FILE* output)
 
     commands = command_table(&command_count);
 
-    /* STUDENT TODO 7: Locate the named command and invoke its handler. */
+    /* STUDENT DONE 7: Locate the named command and invoke its handler. */
     for (size_t i = 0; i < command_count; i++) {
         if (strcmp(commands[i].name, command_name) == 0) {
             return commands[i].handler(game, arguments, output);
