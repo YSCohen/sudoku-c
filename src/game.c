@@ -71,8 +71,8 @@ int game_start_new(SudokuGame* game, Difficulty difficulty)
         return 0;
     }
 
-    // unclear purpose of holes_created param in sudoku_generate_puzzle
-    newGame->puzzle = sudoku_generate_puzzle(newGame->solution, difficulty, NULL);
+    int holes = 0;
+    newGame->puzzle = sudoku_generate_puzzle(newGame->solution, difficulty, &holes);
     if (!newGame->puzzle) {
         board_destroy(&newGame->solution);
         free(newGame);
@@ -99,7 +99,7 @@ int game_start_new(SudokuGame* game, Difficulty difficulty)
     *game = *newGame;
     free(newGame);
 
-    return 1;
+    return holes;
 }
 
 int game_cell_is_fixed(const SudokuGame* game, int row, int column)

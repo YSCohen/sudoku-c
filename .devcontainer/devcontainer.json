@@ -2,6 +2,13 @@
   "name": "COM2113",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "postCreateCommand": "sudo apt-get update && sudo apt-get install -y build-essential gdb valgrind strace nasm binutils make gcc-multilib g++-multilib",
+  "features": {
+    // per gh cli, this is how you add ssh support to container,
+    // easier to use than browser IDE
+    "ghcr.io/devcontainers/features/sshd:1": {
+      "version": "latest"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [
