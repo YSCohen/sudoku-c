@@ -260,6 +260,6 @@ int command_dispatch(SudokuGame* game, char* input, FILE* output)
         }
     }
 
-    fprintf(output, "Command %s is not implemented.\n", command_name);
+    fprintf(output, "Unknown command %s.\n", command_name);
     return 1;
 }
