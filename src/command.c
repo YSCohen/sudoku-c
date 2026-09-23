@@ -31,7 +31,7 @@ static const CommandEntry COMMANDS[] = {
 
 const CommandEntry* command_table(size_t* count)
 {
-    /* STUDENT TODO 7: Expose the command table and its element count. */
+    /* STUDENT DONE 7: Expose the command table and its element count. */
     if (count != NULL) {
         *count = sizeof(COMMANDS) / sizeof(COMMANDS[0]);
     }
