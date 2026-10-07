@@ -42,7 +42,7 @@ int history_push(MoveHistory* history, Move move)
 int history_pop(MoveHistory* history, Move* result)
 {
     /* STUDENT DONE 4: Remove and return the most recent move. */
-    if (history == NULL || history->items == NULL || history->count == 0) return 0;
+    if (result == NULL || history == NULL || history->items == NULL || history->count == 0) return 0;
 
     *result = history->items[--history->count];
     return 1;

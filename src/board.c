@@ -31,7 +31,7 @@ SudokuBoard* board_clone(const SudokuBoard* source)
     SudokuBoard* clone = malloc(sizeof(*clone));
     if (!clone) return NULL;
 
-    clone->cells = malloc(SUDOKU_CELL_COUNT * sizeof(clone->cells));
+    clone->cells = malloc(SUDOKU_CELL_COUNT * sizeof(*clone->cells));
     if (!clone->cells) {
         free(clone);
         return NULL;
@@ -61,7 +61,7 @@ int* board_cell(SudokuBoard* board, int row, int column)
 const int* board_cell_const(const SudokuBoard* board, int row, int column)
 {
     /* STUDENT DONE 2: Return the read-only cell pointer for this coordinate. */
-    if (board == NULL || !board_coordinates_in_range(row, column)) return NULL;
+    if (board == NULL || board->cells == NULL || !board_coordinates_in_range(row, column)) return NULL;
 
     int idx = (SUDOKU_SIZE * row) + column;
     return &(board->cells[idx]);
