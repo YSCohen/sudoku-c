@@ -31,7 +31,7 @@ SudokuBoard* board_clone(const SudokuBoard* source)
     SudokuBoard* clone = malloc(sizeof(*clone));
     if (!clone) return NULL;
 
-    clone->cells = malloc(SUDOKU_CELL_COUNT * sizeof(clone->cells));
+    clone->cells = malloc(SUDOKU_CELL_COUNT * sizeof(*clone->cells));
     if (!clone->cells) {
         free(clone);
         return NULL;
