@@ -62,42 +62,36 @@ int game_start_new(SudokuGame* game, Difficulty difficulty)
 
     if (!game) return 0;
 
-    SudokuGame* newGame = game_create();
-    if (!newGame) return 0;
-
-    newGame->solution = sudoku_generate_solution();
-    if (!newGame->solution) {
-        free(newGame);
+    SudokuBoard* newSolution = sudoku_generate_solution();
+    if (!newSolution) {
         return 0;
     }
 
     int holes = 0;
-    newGame->puzzle = sudoku_generate_puzzle(newGame->solution, difficulty, &holes);
-    if (!newGame->puzzle) {
-        board_destroy(&newGame->solution);
-        free(newGame);
+    SudokuBoard* newPuzzle = sudoku_generate_puzzle(newSolution, difficulty, &holes);
+    if (!newPuzzle) {
+        board_destroy(&newSolution);
         return 0;
     }
 
-    newGame->fixed = create_fixed_map(newGame->puzzle);
-    if (!newGame->fixed) {
-        board_destroy(&newGame->solution);
-        board_destroy(&newGame->puzzle);
-        free(newGame);
+    unsigned char* newFixed = create_fixed_map(newPuzzle);
+    if (!newFixed) {
+        board_destroy(&newSolution);
+        board_destroy(&newPuzzle);
         return 0;
     }
 
-    newGame->difficulty = difficulty;
-    newGame->history = game->history;
-    history_clear(&newGame->history);
-    newGame->active = 1;
+    game->difficulty = difficulty;
+    history_clear(&game->history);
+    game->active = 1;
 
     board_destroy(&game->solution);
     board_destroy(&game->puzzle);
     free(game->fixed);
 
-    *game = *newGame;
-    free(newGame);
+    game->solution = newSolution;
+    game->puzzle = newPuzzle;
+    game->fixed = newFixed;
 
     return holes;
 }
